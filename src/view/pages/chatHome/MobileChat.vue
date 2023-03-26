@@ -12,8 +12,8 @@
               </div>
               <div class="chat-text" v-if="item.chatType == 0">
                 <template>
-                  <div class="" :id="item.uid">{{ item.msg }}</div>
-                  <i v-if="isSend && index === chatList.length - 1" class="flash_cursor"></i>
+                  <div :class="isSend && index === chatList.length - 1 ? 'flash_cursor_parent':''" :id="item.uid">{{ item.msg }}<i class="flash_cursor"></i></div>
+                  
                 </template>
                 
               </div>
@@ -237,7 +237,7 @@ export default {
           smartypants: false//使用更为时髦的标点，比如在引用语法中加入破折号。
       });
       
-      content.innerHTML = ` <div class="markdown-body">${marked.parse(text)}</div>`;
+      content.innerHTML = ` <div class="markdown-body">${marked.parse(text + '<i class="flash_cursor"></i>')}</div>`;
       this.scrollBottom()
     }
   }
@@ -320,9 +320,9 @@ export default {
           //   background-color: rgb(39, 42, 55);
           // }
 
-          pre {
-            // white-space: break-spaces;
-          }
+          // pre {
+          //   // white-space: break-spaces;
+          // }
         }
 
         .chat-img {
@@ -415,8 +415,8 @@ export default {
       }
     }
   }
-  .flash_cursor {
-    width: 15px;
+  .flash_cursor_parent .flash_cursor {
+    width: 10px;
     height: 30px;
     display: inline-block;
     background: #d6e3f5;
